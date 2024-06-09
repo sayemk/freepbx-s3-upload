@@ -2,16 +2,20 @@
 
 **Config**
 
-[aws]
+`/etc/asterisk/s3_go.conf`
 
-access_key_id: AKIAX
+`[aws]`
 
-secret_access_key: Ksa2D5aj
+`access_key_id: AKIAX`
 
-s3_bucket_name: freepbx
+`secret_access_key: Ksa2D5aj`
 
-aws_region: ap-southeast-1
+`s3_bucket_name: freepbx`
+
+`aws_region: ap-southeast-1`
 
 **Run**
 
-s3upload --file="file to upload"
+`go build`
+
+`s3upload --file=recording_file_name`
