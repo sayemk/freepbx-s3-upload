@@ -46,7 +46,7 @@ func main() {
 	//fmt.Println("Day: ", day)
 	s3Key := year + "/" + month + "/" + day + "/" + *fileName
 	filePath := "/var/spool/asterisk/monitor/" + s3Key
-	//filePath := "/Users/sayem/dev/nautilus-report/storage/app/" + s3Key
+	//filePath := s3Key
 
 	accessKeyID, _ := configParser.Get("aws", "access_key_id")
 	secretAccessKey, _ := configParser.Get("aws", "secret_access_key")
