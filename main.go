@@ -4,14 +4,15 @@ import (
 	"bytes"
 	"flag"
 	"fmt"
+	"io"
+	"os"
+	"strings"
+
 	"github.com/aws/aws-sdk-go/aws"
 	"github.com/aws/aws-sdk-go/aws/credentials"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/s3"
 	"github.com/bigkevmcd/go-configparser"
-	"io"
-	"os"
-	"strings"
 )
 
 func main() {
@@ -52,6 +53,7 @@ func main() {
 	secretAccessKey, _ := configParser.Get("aws", "secret_access_key")
 	//sessionToken, _ := config.Get("aws", "session_token")
 	s3BucketName, _ := configParser.Get("aws", "s3_bucket_name")
+	s3BucketInitialPath, _ := configParser.Get("aws", "s3_bucket_initial_path")
 	awsRegion, _ := configParser.Get("aws", "aws_region")
 
 	fmt.Println(accessKeyID, secretAccessKey, s3BucketName, awsRegion)
@@ -90,7 +92,7 @@ func main() {
 	// This uploads the contents of the buffer to S3
 	_, err = svc.PutObject(&s3.PutObjectInput{
 		Bucket: aws.String(s3BucketName),
-		Key:    aws.String(s3Key),
+		Key:    aws.String(s3BucketInitialPath + "/" + s3Key),
 		Body:   bytes.NewReader(buf.Bytes()),
 	})
 	if err != nil {
